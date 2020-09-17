@@ -39,6 +39,25 @@ const requireToken = passport.authenticate('bearer', { session: false });
 const router = express.Router();
 
 
+// INDEX
+// GET /flashcards
+router.get('/flashcards', requireToken, async (req, res, next) => {
+
+  try {
+
+    const flashcards = await Flashcard.find();
+
+    const mappedFlashcards = flashcards.map(flashcards => flashcards.toObject());
+  
+    res.status(httpStatusCodes.success.ok)
+       .json({ flashcard: mappedFlashcards });
+  }
+  catch(err) {
+    // Pass the error to our error handler middleware.
+    next(err);
+  }
+})
+
 
 // CREATE
 // POST /flashcards
@@ -63,6 +82,7 @@ router.post('/flashcards', requireToken, async (req, res, next) => {
        .json({ flashcard: flashcard.toObject() });
   }
   catch(err) {
+    // Pass the error to our error handler middleware.    
     next(err);
   }
 });
