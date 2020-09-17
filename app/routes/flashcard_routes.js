@@ -56,7 +56,28 @@ router.get('/flashcards', requireToken, async (req, res, next) => {
     // Pass the error to our error handler middleware.
     next(err);
   }
-})
+});
+
+
+// SHOW
+// GET /flashcards/5a7db6c74d55bc51bdf39793
+router.get('/flashcards/:id', requireToken, async (req, res, next) => {
+
+  try {
+    // req.params.id will be set based on the `:id` in the route
+    const flashcard = await Flashcard.findById(req.params.id);
+
+    // What if there is no flashcard?
+    handle404(flashcard);
+
+    res.status(httpStatusCodes.success.ok)
+      .json({ flashcard: flashcard.toObject() });    
+  }
+  catch(err) {
+    // Pass the error to our error handler middleware.    
+    next(err);
+  }
+});
 
 
 // CREATE

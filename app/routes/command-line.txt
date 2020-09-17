@@ -1,10 +1,13 @@
 
 
+// This is a toy password.
 EMAIL="srl@foo.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
-user id = 5f6369ea682dce5142c4662c
+srl@gmail.com user id = 5f6369ea682dce5142c4662c
 
 
 TOKEN="f2f5b46324c3dd917e0a16104de5374e" ENGLISH="yes" RUSSIAN="нет" sh ./curl-scripts/routes/create.sh
 
 TOKEN="f2f5b46324c3dd917e0a16104de5374e" sh ./curl-scripts/routes/index.sh
+
+TOKEN="1ee156f6a51d0f53b3ba8a9b586ae953" ID="5f63a272bd139b7a3ff9961e" sh ./curl-scripts/routes/show.sh
 
