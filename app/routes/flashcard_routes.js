@@ -29,6 +29,7 @@ const requireOwnership = customErrors.requireOwnership;
 // this is middleware that will remove blank fields from `req.body`, e.g.
 // { example: { title: '', text: 'foo' } } -> { example: { text: 'foo' } }
 const removeBlanks = require('../../lib/remove_blank_fields');
+const flashcard = require('../models/flashcard');
 
 // passing this as a second argument to `router.<verb>` will make it
 // so that a token MUST be passed for that route to be available
@@ -47,10 +48,16 @@ router.get('/flashcards', requireToken, async (req, res, next) => {
 
     const flashcards = await Flashcard.find();
 
-    const mappedFlashcards = flashcards.map(flashcards => flashcards.toObject());
+    const userFlashcards = flashcards.filter(flashcard => {
+
+      if (flashcard.owner._id.toString() === req.user.id)
+      {
+        return flashcard;
+      }
+    }).map(flashcard => flashcard.toObject());
   
     res.status(httpStatusCodes.success.ok)
-       .json({ flashcard: mappedFlashcards });
+       .json({ flashcards: userFlashcards });
   }
   catch(err) {
     // Pass the error to our error handler middleware.
