@@ -111,25 +111,29 @@ router.post('/flashcards', requireToken, async (req, res, next) => {
 
 // UPDATE
 // PATCH /examples/5a7db6c74d55bc51bdf39793
-router.patch('/flashcards/:id', requireToken, removeBlanks, (req, res, next) => {
-  // if the client attempts to change the `owner` property by including a new
-  // owner, prevent that by deleting that key/value pair
-  delete req.body.flashcard.owner;
+router.patch('/flashcards/:id', requireToken, removeBlanks, async (req, res, next) => {
 
-  Flashcard.findById(req.params.id)
-    .then(handle404)
-    .then(flashcard => {
-      // pass the `req` object and the Mongoose record to `requireOwnership`
-      // it will throw an error if the current user isn't the owner
-      requireOwnership(req, flashcard)
+  try {
+    // if the client attempts to change the `owner` property by including a new
+    // owner, prevent that by deleting that key/value pair
+    delete req.body.flashcard.owner;
 
-      // pass the result of Mongoose's `.update` to the next `.then`
-      return flashcard.updateOne(req.body.flashcard)
-    })
-    // if that succeeded, return 204 and no JSON
-    .then(() => res.sendStatus(204))
-    // if an error occurs, pass it to the handler
-    .catch(next)
+    const flashcard = await Flashcard.findById(req.params.id);
+
+    handle404(flashcard);
+
+    // pass the `req` object and the Mongoose record to `requireOwnership`
+    // it will throw an error if the current user isn't the owner
+    requireOwnership(req, flashcard); 
+
+    await flashcard.updateOne(req.body.flashcard);
+
+    res.sendStatus(httpStatusCodes.success.noContent);
+  }
+  catch(err) {
+    // Pass the error to our error handler middleware.    
+    next(err);
+  }
 })
 
 
@@ -139,7 +143,7 @@ router.delete('/flashcards/:id', requireToken, async (req, res, next) => {
 
   try {
 
-    let flashcard = await Flashcard.findById(req.params.id);
+    const flashcard = await Flashcard.findById(req.params.id);
 
     handle404(flashcard);
 
