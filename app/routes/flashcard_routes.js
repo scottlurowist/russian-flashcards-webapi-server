@@ -133,4 +133,30 @@ router.patch('/flashcards/:id', requireToken, removeBlanks, (req, res, next) => 
 })
 
 
+// DESTROY
+// DELETE /flashcards/5a7db6c74d55bc51bdf39793
+router.delete('/flashcards/:id', requireToken, async (req, res, next) => {
+
+  try {
+
+    let flashcard = await Flashcard.findById(req.params.id);
+
+    handle404(flashcard);
+
+    // pass the `req` object and the Mongoose record to `requireOwnership`
+    // it will throw an error if the current user isn't the owner
+    requireOwnership(req, flashcard);    
+
+    // delete the example ONLY IF the above didn't throw
+    await flashcard.deleteOne();
+
+    res.sendStatus(httpStatusCodes.success.noContent);
+  }
+  catch(err) {
+    // Pass the error to our error handler middleware.    
+    next(err);
+  }
+})
+
+
 module.exports = router;
