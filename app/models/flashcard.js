@@ -1,4 +1,7 @@
-const mongoose = require('mongoose')
+
+
+const mongoose = require('mongoose');
+
 
 const flashcardSchema = new mongoose.Schema({
   englishWord: {
@@ -17,6 +20,6 @@ const flashcardSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true,
-})
+});
 
-module.exports = mongoose.model('Flashcard', userSchema)
+module.exports = mongoose.model('Flashcard', flashcardSchema)

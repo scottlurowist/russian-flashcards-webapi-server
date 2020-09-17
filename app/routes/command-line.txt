@@ -1,0 +1,8 @@
+
+
+EMAIL="srl@foo.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
+user id = 5f6369ea682dce5142c4662c
+
+
+TOKEN="580413b2a4585c9e275614b4b255b3e5" ENGLISH="yes" RUSSIAN="да" sh ./curl-scripts/routes/create.sh
+
