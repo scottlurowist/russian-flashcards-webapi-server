@@ -1,4 +1,7 @@
-const mongoose = require('mongoose')
+
+
+const mongoose = require('mongoose');
+
 
 const flashcardSchema = new mongoose.Schema({
   englishWord: {
@@ -9,7 +12,7 @@ const flashcardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  flashcardOwner: {
+  owner: {
     // References use the type ObjectId
     type: mongoose.Schema.Types.ObjectId,
     // the name of the model to which they refer
@@ -17,6 +20,6 @@ const flashcardSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true,
-})
+});
 
-module.exports = mongoose.model('Flashcard', userSchema)
+module.exports = mongoose.model('Flashcard', flashcardSchema)

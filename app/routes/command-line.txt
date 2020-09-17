@@ -1,0 +1,22 @@
+
+
+// Singup and signin.
+// This is a toy password.
+EMAIL="srl@gmail.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
+EMAIL="dina@gmail.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
+
+// Create
+TOKEN="7cda52dfaefe2a3d8da54ba33adc648b" ENGLISH="car" RUSSIAN="машина" sh ./curl-scripts/routes/create.sh
+
+// Show all flashcards
+TOKEN="1ea2fc856e298dec952e3cb3a9df5f3d" sh ./curl-scripts/routes/index.sh
+
+// Show a single flashcard
+TOKEN="1ee156f6a51d0f53b3ba8a9b586ae953" ID="5f63b6a0a68df2868d9e4940" sh ./curl-scripts/routes/show.sh
+
+// Update a flashcard
+TOKEN="b22a382583766d60534d928f8d8e0e9a" ID="5f63d021b3cb05a23832589a" ENGLISH="no" RUSSIAN="нет" sh ./curl-scripts/routes/update.sh
+
+// Delete a flashcard
+TOKEN="7cda52dfaefe2a3d8da54ba33adc648b" ID="5f63d92f5822ffa9b3c879ce" sh ./curl-scripts/routes/delete.sh
+
