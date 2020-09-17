@@ -12,7 +12,7 @@ const flashcardSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  flashcardOwner: {
+  owner: {
     // References use the type ObjectId
     type: mongoose.Schema.Types.ObjectId,
     // the name of the model to which they refer

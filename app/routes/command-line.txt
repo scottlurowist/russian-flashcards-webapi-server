@@ -1,13 +1,16 @@
 
 
 // This is a toy password.
-EMAIL="srl@foo.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
-srl@gmail.com user id = 5f6369ea682dce5142c4662c
+EMAIL="srl@gmail.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
+EMAIL="dina@gmail.com" PASSWORD="foo" sh ./curl-scripts/auth/sign-in.sh
 
 
-TOKEN="f2f5b46324c3dd917e0a16104de5374e" ENGLISH="yes" RUSSIAN="нет" sh ./curl-scripts/routes/create.sh
 
-TOKEN="f2f5b46324c3dd917e0a16104de5374e" sh ./curl-scripts/routes/index.sh
+TOKEN="325206389ae2d4d7069f7a124af9f3d2" ENGLISH="bird" RUSSIAN="птица" sh ./curl-scripts/routes/create.sh
 
-TOKEN="1ee156f6a51d0f53b3ba8a9b586ae953" ID="5f63a272bd139b7a3ff9961e" sh ./curl-scripts/routes/show.sh
+TOKEN="1ea2fc856e298dec952e3cb3a9df5f3d" sh ./curl-scripts/routes/index.sh
+
+TOKEN="1ee156f6a51d0f53b3ba8a9b586ae953" ID="5f63b6a0a68df2868d9e4940" sh ./curl-scripts/routes/show.sh
+
+TOKEN="b22a382583766d60534d928f8d8e0e9a" ID="5f63d021b3cb05a23832589a" ENGLISH="no" RUSSIAN="нет" sh ./curl-scripts/routes/update.sh
 
